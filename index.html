@@ -696,8 +696,8 @@ section {
    ============================================================ */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 .project-card {
   position: relative;
@@ -917,6 +917,9 @@ footer {
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+@media (max-width: 1200px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; gap: 50px; }
   .hero-card-wrap { justify-content: flex-start; }
@@ -1358,38 +1361,66 @@ jobs.forEach((j, i) => {
 /* ---- PROJECTS DATA ---- */
 const projects = [
   {
+    emoji: '🎮',
+    name: 'Rhythm Bust VR — Meta Quest 2',
+    badge: 'VR · Algoma Capstone',
+    badgeColor: '#a855f7',
+    desc: 'Developed a fully functional VR rhythm game deployed on Meta Quest 2. Players hit incoming blocks in sync with rhythm inside an immersive medieval castle — built in Unity with Oculus XR SDK, VR controller input, scoring system, and standalone headset deployment.',
+    tags: ['Unity','C#','Meta Quest 2','Oculus XR SDK','VR Development','Android Build','3D Design']
+  },
+  {
+    emoji: '👑',
+    name: 'Rise of Red King — Unity FPS',
+    badge: 'Game Dev · Algoma Capstone',
+    badgeColor: '#ff2d78',
+    desc: 'Designed and built a complete first-person shooter in Unity set in 1915 — featuring light-based enemy damage mechanics, weapon systems (melee + firearm), destructible crates, door interactions, full HUD, enemy AI, and a multi-stage scoring system.',
+    tags: ['Unity','C#','FPS Design','Enemy AI','Game UI','Physics','Algoma University']
+  },
+  {
     emoji: '🏠',
     name: 'Home Lab — Enterprise IT Simulation',
+    badge: 'Personal · Ongoing',
+    badgeColor: '#00e5ff',
     desc: 'Built a VMware lab with Windows Server 2019, Active Directory, Group Policy, DNS, and DHCP — simulating enterprise IT for hands-on skill development and certification prep.',
     tags: ['VMware','Windows Server 2019','Active Directory','Group Policy','DNS','DHCP']
   },
   {
-    emoji: '🔬',
-    name: 'Multi-Tenant Architecture Research',
-    desc: 'Conducted academic research on multi-tenant cloud architecture — studying tenant isolation, shared resource management, data segregation, and scalability in SaaS/IaaS platforms.',
-    tags: ['Azure','AWS','Multi-Tenant','SaaS','IaaS','Cloud Security']
-  },
-  {
-    emoji: '☁️',
-    name: 'Multi-Tenant Cloud Environment Admin',
-    desc: 'Designed and administered a production multi-tenant cloud environment — configuring tenant-level RBAC, network segmentation, compliance policies, and secure onboarding.',
-    tags: ['Azure','RBAC','Network Segmentation','Compliance','Xtend Value']
-  },
-  {
     emoji: '📚',
     name: 'IT Onboarding & Knowledge Base',
+    badge: 'Healthcare IT · 2025',
+    badgeColor: '#ffb700',
     desc: 'Built standardized onboarding checklists and a 20+ article knowledge base for healthcare logistics IT — reducing repeat ticket volume and improving new hire IT experience.',
     tags: ['Knowledge Management','Onboarding','ServiceNow','Documentation','ITIL']
   },
   {
+    emoji: '☁️',
+    name: 'Multi-Tenant Cloud Environment Admin',
+    badge: 'Xtend Value · 2022',
+    badgeColor: '#00e5ff',
+    desc: 'Designed and administered a production multi-tenant cloud environment — configuring tenant-level RBAC, network segmentation, compliance policies, and secure onboarding workflows across Azure and AWS.',
+    tags: ['Azure','AWS','RBAC','Network Segmentation','SSL','Compliance']
+  },
+  {
+    emoji: '🔬',
+    name: 'Multi-Tenant Architecture Research',
+    badge: 'CHARUSAT · 2021–2023',
+    badgeColor: '#a855f7',
+    desc: 'Conducted academic research on multi-tenant cloud architecture — studying tenant isolation, shared resource management, data segregation, and scalability in SaaS/IaaS platforms.',
+    tags: ['Azure','AWS','Multi-Tenant','SaaS','IaaS','Cloud Security']
+  },
+  {
     emoji: '🥽',
-    name: 'AR/VR IT Infrastructure — Algoma Capstone',
-    desc: 'Designed AR environment and configured Azure cloud backend — resource provisioning, access controls, and full technical architecture documentation for the university capstone.',
-    tags: ['Azure','AR/VR','Cloud Architecture','Access Control','Algoma University']
+    name: 'AR/VR IT Infrastructure — Algoma',
+    badge: 'Capstone · Azure',
+    badgeColor: '#ff2d78',
+    desc: 'Configured Azure cloud backend for an AR/VR application — resource provisioning, identity and access management, and full technical architecture documentation for the Algoma University capstone.',
+    tags: ['Azure','AR/VR','Cloud Architecture','Access Control','Resource Provisioning']
   },
   {
     emoji: '🧠',
-    name: 'Cloud Migration & Azure DevOps Setup',
+    name: 'Cloud Migration & Azure DevOps',
+    badge: 'Personal · 2023',
+    badgeColor: '#ffb700',
     desc: 'Set up Azure DevOps pipelines and cloud migration frameworks for multi-tenant environments — integrating Veeam Backup for data resilience and documenting all configurations.',
     tags: ['Azure DevOps','Cloud Migration','Veeam','CI/CD','Documentation']
   }
@@ -1399,9 +1430,13 @@ const pg = document.getElementById('projects-grid');
 projects.forEach((p, i) => {
   const div = document.createElement('div');
   div.className = 'project-card reveal fade-up';
-  div.style.transitionDelay = (i*0.08) + 's';
+  div.style.transitionDelay = (i*0.07) + 's';
+  const badgeStyle = `font-size:10px;font-weight:600;padding:3px 10px;border-radius:100px;background:${p.badgeColor}28;border:1px solid ${p.badgeColor}55;color:${p.badgeColor};letter-spacing:0.5px;white-space:nowrap;flex-shrink:0;`;
   div.innerHTML = `
-    <span class="project-emoji">${p.emoji}</span>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:14px;">
+      <span class="project-emoji" style="margin-bottom:0;">${p.emoji}</span>
+      <span style="${badgeStyle}">${p.badge}</span>
+    </div>
     <div class="project-name">${p.name}</div>
     <div class="project-desc">${p.desc}</div>
     <div class="project-tags">${p.tags.map(t=>`<span class="project-tag">${t}</span>`).join('')}</div>`;
